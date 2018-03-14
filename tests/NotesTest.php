@@ -11,13 +11,16 @@ class NotesTest extends TestCase
      *
      * @return void
      */
+    use DatabaseTransactions;  //para no hacer que se quede el dato en la base de datos
+    //en phpunit.xml se puso na nueva base de datos test configurada en config/databases.php
+
     public function testNotesList()
     {
         //Note::create(['note'=> 'My first note']);
         //Note::create(['note'=> 'My second note']);
         $this->visit('notes')
-            ->see('Mi primera nota')
-            ->see('<strong>HOLA</strong> esto es una nota con html');
+            ->see('algo');
+           // ->see('<strong>HOLA</strong> esto es una nota con html');
     }
 
     public function testNote()
@@ -29,7 +32,7 @@ class NotesTest extends TestCase
            ->type('algo','note')
            ->press('Crear nota')
            ->seePageIs('notes')
-           ->see('Mi primera nota')
+           ->see('algo')
            ->seeInDatabase('notes',[
                'note'=>'algo'
            ]);
