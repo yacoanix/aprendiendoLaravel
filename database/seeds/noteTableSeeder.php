@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Note;
+use App\Category;
 class noteTableSeeder extends Seeder
 {
     /**
@@ -12,6 +13,13 @@ class noteTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Note::class)->times(100)->create();
+        $categories = Category::all();
+        $notes = factory(Note::class)->times(100)->make();
+
+        foreach($notes as $note){
+            $category=$categories->random();
+
+            $category->notes()->save($note);
+        }
     }
 }
