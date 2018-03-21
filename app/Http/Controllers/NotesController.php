@@ -45,5 +45,10 @@ class NotesController extends Controller
         return view('notes/details',compact('note'));
     }
 
+    public function welcome()
+    {
+        return view('notes/welcome');
+    }
+
 
 }

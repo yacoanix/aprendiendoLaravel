@@ -13,16 +13,19 @@
 use App\Note;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/auth/login');
 });
 
-Route::get('notes', 'NotesController@listNotes');
+Route::get('notes', 'NotesController@listNotes')->middleware('auth');
 
-Route::post('notes', 'NotesController@store');
+Route::get('welcome', 'NotesController@welcome')->middleware('auth');
 
-Route::get('notes/create', 'NotesController@create');
+Route::post('notes', 'NotesController@store')->middleware('auth');
 
-Route::get('notes/{note}', 'NotesController@show')->where('note', '[0-9]+');
+Route::get('notes/create', 'NotesController@create')->middleware('auth');
+
+Route::get('notes/{note}', 'NotesController@show')->where('note', '[0-9]+')->middleware('auth');
+
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->middleware('auth');
