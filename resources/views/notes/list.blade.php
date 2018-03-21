@@ -14,11 +14,10 @@
             @else
                 <span class="label label-info">Default</span>
             @endif
-            @if(strlen($note->note)>30)
-                {{ substr($note->note, 0, 30) }}...
-            @else
-                {{ $note->note }}
-            @endif
+
+            {{ substr($note->note, 0, 30) }}...
+            <a href="{{ 'notes/'.$note->id}}" class="small">ver nota</a>
+
         </li>
     @endforeach
 </ul>
