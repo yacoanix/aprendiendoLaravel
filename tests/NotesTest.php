@@ -17,7 +17,8 @@ class NotesTest extends TestCase
     public function testNotesList()
     {
         //Note::create(['note'=> 'My first note']);
-        //Note::create(['note'=> 'My second note']);
+        Note::create(['note'=> 'algo']);
+        Auth::loginUsingId(1);
         $this->visit('notes')
             ->see('algo');
            // ->see('<strong>HOLA</strong> esto es una nota con html');
@@ -25,6 +26,7 @@ class NotesTest extends TestCase
 
     public function testNote()
     {
+        Auth::loginUsingId(1);
        $this->visit('notes')
            ->click('Añade una nota')
            ->seePageIs('notes/create')
