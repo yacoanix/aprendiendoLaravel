@@ -14,7 +14,11 @@
             @else
                 <span class="label label-info">Default</span>
             @endif
-            {{ $note->note }}
+            @if(strlen($note->note)>30)
+                {{ substr($note->note, 0, 30) }}...
+            @else
+                {{ $note->note }}
+            @endif
         </li>
     @endforeach
 </ul>
