@@ -39,7 +39,6 @@ class NotesController extends Controller
 
     }
 
-
     public function show($note){
         $note=Note::findOrFail($note);
         return view('notes/details',compact('note'));
@@ -50,5 +49,11 @@ class NotesController extends Controller
         return view('notes/welcome');
     }
 
+    public function delete($id)
+    {
+        $note = Note::find($id);
+        $note->delete();
+        return redirect()->to('notes');
 
+    }
 }
