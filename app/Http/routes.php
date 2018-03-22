@@ -13,8 +13,8 @@
 use App\Note;
 
 Route::get('/', function () {
-    return view('/auth/login');
-});
+    return view('/notes/welcome');
+})->middleware('auth');
 
 Route::get('notes', 'NotesController@listNotes')->middleware('auth');
 

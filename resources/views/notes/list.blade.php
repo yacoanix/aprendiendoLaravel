@@ -9,12 +9,7 @@
 <ul class="list-group">
     @foreach ($notes as $note)
         <li class="list-group-item">
-            @if($note->category)
             <span class="label label-info">{{ $note->category->name }}</span>
-            @else
-                <span class="label label-info">Default</span>
-
-            @endif
             @if(strlen($note->note)>100)
             {{ substr($note->note, 0, 100) }}...
             @else
@@ -22,8 +17,6 @@
             @endif
             <span style="float:right"><a href="{{ 'notes/del/'.$note->id}}"><button class="btn btn-danger btn-xs" type="button">Eliminar</button></a></span>
             <span style="float:right;margin-right:10px"><a href="{{ 'notes/look/'.$note->id}}" ><button class="btn btn-info btn-xs" type="button">Ver nota</button></a></span>
-
-
         </li>
     @endforeach
 </ul>

@@ -15,10 +15,8 @@ class noteTableSeeder extends Seeder
     {
         $categories = Category::all();
         $notes = factory(Note::class)->times(100)->make();
-
         foreach($notes as $note){
             $category=$categories->random();
-
             $category->notes()->save($note);
         }
     }

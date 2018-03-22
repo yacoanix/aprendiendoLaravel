@@ -13,8 +13,7 @@ class NotesController extends Controller
 {
     public function listNotes()
     {
-        $notes = Note::paginate(20);
-
+        $notes = Note::where('user_id',\Auth::user()->id)->orderBy('created_at', 'desc')->paginate(20);
         return view('notes/list', compact('notes'));
     }
 
@@ -35,8 +34,12 @@ class NotesController extends Controller
             [
                'note'=>['required','max:200']
             ]);
-       // {{ Form::select('label', ['Tareas', 'Recordatorios', 'Recursos', 'Eventos']) }}
         $datos=request()->all();
+
+
+
+        $id=\Auth::user()->id;
+        $datos = array_add($datos, 'user_id', $id); //AÑADE A DATOS LA ID USUARIO
         Note::create($datos);
         return redirect()->to('notes');
 
