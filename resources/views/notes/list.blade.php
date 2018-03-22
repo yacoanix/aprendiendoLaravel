@@ -4,7 +4,7 @@
 
 <h1>Notes</h1>
 <p>
-    <a href="{{ url('notes/create') }}">Añade una nota</a>
+    <!-- <a href="{{ url('notes/create') }}">Añade una nota</a> -->
 </p>
 <ul class="list-group">
     @foreach ($notes as $note)
@@ -16,7 +16,7 @@
             {{ $note->note }}
             @endif
             <span style="float:right"><a href="{{ 'notes/del/'.$note->id}}"><button class="btn btn-danger btn-xs" type="button">Eliminar</button></a></span>
-            <span style="float:right;margin-right:10px"><a href="{{ 'notes/look/'.$note->id}}" ><button class="btn btn-info btn-xs" type="button">Ver nota</button></a></span>
+            <span style="float:right;margin-right:10px"><a href="{{ url('notes/look/'.$note->id)}}" ><button class="btn btn-info btn-xs" type="button">Ver nota</button></a></span>
         </li>
     @endforeach
 </ul>

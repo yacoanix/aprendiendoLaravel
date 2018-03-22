@@ -31,3 +31,9 @@ Route::get('notes/del/{note}', 'NotesController@delete')->where('note', '[0-9]+'
 Route::auth();
 
 Route::get('/home', 'HomeController@index')->middleware('auth');
+
+Route::get('notes/upt/{note}', 'NotesController@pgupdate')->middleware('auth');
+
+Route::post('update/{note}', 'NotesController@update')->middleware('auth');
+
+

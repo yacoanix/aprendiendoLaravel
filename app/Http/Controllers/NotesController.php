@@ -36,8 +36,6 @@ class NotesController extends Controller
             ]);
         $datos=request()->all();
 
-
-
         $id=\Auth::user()->id;
         $datos = array_add($datos, 'user_id', $id); //AÑADE A DATOS LA ID USUARIO
         Note::create($datos);
@@ -62,4 +60,26 @@ class NotesController extends Controller
         return redirect()->to('notes');
 
     }
+
+    public function pgupdate($id)
+    {
+        $note = Note::find($id);
+        $category = Category::all();
+        return view('notes/update',compact('note','category'));
+
+    }
+    public function update($id){
+        $this->validate(request(),
+            [
+                'note'=>['required','max:200']
+            ]);
+        $datos=request()->all();
+        $notas=array_get($datos, 'note');
+        $categ=array_get($datos, 'category_id');
+        Note::where('id',$id)->update(['note'=> $notas]);
+        Note::where('id',$id)->update(['category_id'=> $categ ]);
+        $note=Note::findOrFail($id);
+        return view('notes/details',compact('note'));
+    }
+
 }

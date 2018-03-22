@@ -4,14 +4,13 @@
 
     <h2>Nota</h2>
     <p class="small">Categoria:</p>
-    @if($note->category)
         <a class="label label-info">{{ $note->category->name }}</a>
-    @else
-        <a class="label label-info">Default</a>
-    @endif
     <br><br>
+    <div class="list-group-item">
     {{ $note->note }}
+    </div>
     <br><br>
-    <a href="{{ url('notes') }}">Ver todas las notas</a>
+    <a href="{{ url('notes') }}"><button class="btn btn-info" type="button">Volver atras</button></a>
+    <a href="{{ url('notes/upt/'.$note->id)}}"><button class="btn btn-warning" type="button">Modificar</button></a>
 
 @endsection
