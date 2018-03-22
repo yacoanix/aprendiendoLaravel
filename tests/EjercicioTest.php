@@ -23,11 +23,13 @@ class TestEjercicio extends TestCase
         $this->visit('notes')
             ->see('Inicio de nota')
             ->seeInElement('.label','Default')
-            ->dontSee('fin de nota')
+            ->dontSee('fin de nota');
+            /*
             ->seeLink('ver nota')
             ->click('ver nota')
             ->see($text)
             ->see('Ver todas las notas')
             ->click('Ver todas las notas', 'notes');
+            */
     }
 }

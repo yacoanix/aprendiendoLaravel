@@ -27,6 +27,7 @@ Route::get('notes/create', 'NotesController@create')->middleware('auth');
 Route::get('notes/look/{note}', 'NotesController@show')->where('note', '[0-9]+')->middleware('auth');
 
 Route::get('notes/del/{note}', 'NotesController@delete')->where('note', '[0-9]+')->middleware('auth');
+
 Route::auth();
 
 Route::get('/home', 'HomeController@index')->middleware('auth');

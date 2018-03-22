@@ -17,8 +17,10 @@ class NotesTest extends TestCase
     public function testNotesList()
     {
         //Note::create(['note'=> 'My first note']);
-        Note::create(['note'=> 'algo']);
         Auth::loginUsingId(1);
+        $algo='algo';
+        Note::create(['note'=> $algo ]);
+
         $this->visit('notes')
             ->see('algo');
            // ->see('<strong>HOLA</strong> esto es una nota con html');

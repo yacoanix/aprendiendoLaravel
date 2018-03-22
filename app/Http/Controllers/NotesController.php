@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Note;
+use App\Category;
 
 use App\Http\Requests;
 
@@ -20,7 +21,8 @@ class NotesController extends Controller
 
     public function create()
     {
-        return view('notes/create');
+        $category = Category::all();
+        return view('notes/create',compact('category'));
     }
 
 
@@ -33,6 +35,7 @@ class NotesController extends Controller
             [
                'note'=>['required','max:200']
             ]);
+       // {{ Form::select('label', ['Tareas', 'Recordatorios', 'Recursos', 'Eventos']) }}
         $datos=request()->all();
         Note::create($datos);
         return redirect()->to('notes');
