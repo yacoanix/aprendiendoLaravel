@@ -45,7 +45,12 @@ class NotesController extends Controller
 
     public function show($note){
         $note=Note::findOrFail($note);
-        return view('notes/details',compact('note'));
+        $id=\Auth::user()->id;
+        $idnot=$note->user_id;
+        if($id==$idnot)
+            return view('notes/details',compact('note'));
+        else
+            return view('notes/welcome');
     }
 
     public function welcome()
@@ -65,7 +70,12 @@ class NotesController extends Controller
     {
         $note = Note::find($id);
         $category = Category::all();
-        return view('notes/update',compact('note','category'));
+        $id=\Auth::user()->id;
+        $idnot=$note->user_id;
+        if($id==$idnot)
+            return view('notes/update',compact('note','category'));
+        else
+            return view('notes/welcome');
 
     }
     public function update($id){

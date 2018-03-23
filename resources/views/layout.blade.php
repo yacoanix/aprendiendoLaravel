@@ -57,8 +57,8 @@
                 </ul>
                 @else
                 <ul class="nav navbar-nav">
-                    <li id="botonnav1"><a href="http://laravel.proyecto/notes">Notas</a></li>
-                    <li id="botonnav2"><a href="http://laravel.proyecto/notes/create">Crear nota</a></li>
+                    <li id="botonnav1"><a href="{{ url('notes') }}">Notas</a></li>
+                    <li id="botonnav2"><a href="{{ url('notes/create') }}">Crear nota</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
