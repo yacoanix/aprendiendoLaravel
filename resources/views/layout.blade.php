@@ -34,10 +34,7 @@
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-        @if (Auth::guest())
-            <div></div>
-        @else
-
+       
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -45,13 +42,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            	@if (Auth::guest())
+
+       		@else
             <a class="navbar-brand" href="{{ url('welcome') }}">Inicio</a>
+     
+        	@endif
         </div>
-        @endif
         <div id="navbar" class="collapse navbar-collapse">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav">
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
                 </ul>
