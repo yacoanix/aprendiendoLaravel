@@ -64,6 +64,5 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="laravel5-image-upload" />
   </component>
 </module>

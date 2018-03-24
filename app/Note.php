@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Note extends Model
 {
-    protected $fillable = ['note', 'category_id', 'user_id'];
+    protected $fillable = ['note', 'category_id', 'user_id', 'image'];
 
     public function category(){
         return $this->belongsTo(Category::class);//una nota tiene una categoria

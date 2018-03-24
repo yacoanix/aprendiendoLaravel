@@ -25,22 +25,28 @@ class NotesController extends Controller
     }
 
 
-    public function store()
+    public function store(Request $request)
     {
         //return request()->all(); para todos
         //return request()->get('note'); para uno solo
         //return request()->only(['note']); //varios
         $this->validate(request(),
             [
-               'note'=>['required','max:200']
+                'note'=>['required','max:200'],
             ]);
+        //$datos=request()->only(['notes']);
         $datos=request()->all();
-
+        $image = $request->file('imagen');
         $id=\Auth::user()->id;
+        $nombre = $image->getClientOriginalName(); //IMPORTANTE UNO
         $datos = array_add($datos, 'user_id', $id); //AÑADE A DATOS LA ID USUARIO
+        $datos = array_add($datos, 'image', $nombre);
         Note::create($datos);
-        return redirect()->to('notes');
 
+        \Storage::disk('local')->put($nombre,  \File::get($image)); //IMPORTANTE 2 Y CONFIG/FYLESISTEM AÑADIR LOCAL
+        //https://styde.net/sistema-de-archivos-y-almacenamiento-en-laravel-5/
+
+        return redirect()->to('notes');
     }
 
     public function show($note){
@@ -90,6 +96,19 @@ class NotesController extends Controller
         Note::where('id',$id)->update(['category_id'=> $categ ]);
         $note=Note::findOrFail($id);
         return view('notes/details',compact('note'));
+    }
+
+    public function devolvImg($archivo)
+    {
+        $public_path = public_path();
+        $url = $public_path.'/storage/'.$archivo;
+        //verificamos si el archivo existe y lo retornamos
+        if (\Storage::exists($archivo))
+        {
+            return response()->download($url);
+        }
+        //si no se encuentra lanzamos un error 404.
+        abort(404);
     }
 
 }

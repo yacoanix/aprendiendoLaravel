@@ -30,7 +30,7 @@
 
         </head>
 
-<body onload="cambioBoton()">
+<body>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
