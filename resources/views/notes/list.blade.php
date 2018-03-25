@@ -4,7 +4,7 @@
 
 <h1>Notes</h1>
 <p>
-    <!-- <a href="{{ url('notes/create') }}">Añade una nota</a> -->
+     <a href="{{ url('notes/create') }}">Añade una nota</a>
 </p>
 <ul class="list-group">
     @foreach ($notes as $note)

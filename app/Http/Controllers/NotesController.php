@@ -36,15 +36,21 @@ class NotesController extends Controller
             ]);
         //$datos=request()->only(['notes']);
         $datos=request()->all();
-        $image = $request->file('imagen');
         $id=\Auth::user()->id;
-        $nombre = $image->getClientOriginalName(); //IMPORTANTE UNO
+        $image = $request->file('imagen');
+
+
+        if($image != null) {
+            $nombre = $image->getClientOriginalName(); //IMPORTANTE UNO
+            $datos = array_add($datos, 'image', $nombre);
+            \Storage::disk('local')->put($nombre, \File::get($image)); //IMPORTANTE 2 Y CONFIG/FYLESISTEM AÑADIR LOCAL
+            //https://styde.net/sistema-de-archivos-y-almacenamiento-en-laravel-5/
+        }
+
+
         $datos = array_add($datos, 'user_id', $id); //AÑADE A DATOS LA ID USUARIO
-        $datos = array_add($datos, 'image', $nombre);
         Note::create($datos);
 
-        \Storage::disk('local')->put($nombre,  \File::get($image)); //IMPORTANTE 2 Y CONFIG/FYLESISTEM AÑADIR LOCAL
-        //https://styde.net/sistema-de-archivos-y-almacenamiento-en-laravel-5/
 
         return redirect()->to('notes');
     }
@@ -67,6 +73,10 @@ class NotesController extends Controller
     public function delete($id)
     {
         $note = Note::find($id);
+        $img = $note->image;
+        if($img != null) {
+            \Storage::delete($img);
+        }
         $note->delete();
         return redirect()->to('notes');
 
@@ -82,7 +92,6 @@ class NotesController extends Controller
             return view('notes/update',compact('note','category'));
         else
             return view('notes/welcome');
-
     }
     public function update($id){
         $this->validate(request(),
@@ -92,6 +101,17 @@ class NotesController extends Controller
         $datos=request()->all();
         $notas=array_get($datos, 'note');
         $categ=array_get($datos, 'category_id');
+        $image = request()->file('imagen');
+        if($image != null){
+            $nombre = $image->getClientOriginalName(); //IMPORTANTE UNO
+            $note = Note::find($id);
+            if($note->image != $nombre)
+            {
+                \Storage::delete($note->image);
+                \Storage::disk('local')->put($nombre, \File::get($image));
+                Note::where('id',$id)->update(['image'=> $nombre ]);
+            }
+        }
         Note::where('id',$id)->update(['note'=> $notas]);
         Note::where('id',$id)->update(['category_id'=> $categ ]);
         $note=Note::findOrFail($id);
@@ -100,8 +120,9 @@ class NotesController extends Controller
 
     public function devolvImg($archivo)
     {
-        $public_path = public_path();
-        $url = $public_path.'/storage/'.$archivo;
+        $public_path = storage_path();
+        $url = $public_path.'/'.$archivo;
+
         //verificamos si el archivo existe y lo retornamos
         if (\Storage::exists($archivo))
         {
