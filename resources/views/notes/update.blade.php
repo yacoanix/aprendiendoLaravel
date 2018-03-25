@@ -23,7 +23,7 @@
             @else
                 <label>Cambiar imagen (opcional):</label>
             @endif
-            <input name="imagen" type="file" accept=".jpg, .jpeg, .png">
+            <input name="imagen" type="file" accept=".jpg, .jpeg">
         </div>
         <br><br>
         <a href="{{ url('notes/look/'.$note->id) }}"><button type="button" style="margin-left:1.5%" class="btn btn-danger">Cancelar</button></a>

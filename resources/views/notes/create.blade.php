@@ -20,7 +20,7 @@
                 <br><br>
                 <span>
             <label>Imagen a subir (opcional):</label>
-            <input name="imagen" type="file" accept=".jpg, .jpeg, .png">
+            <input name="imagen" type="file" accept=".jpg, .jpeg">
                 </span>
             </div>
         </div>
