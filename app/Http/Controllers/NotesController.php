@@ -112,7 +112,7 @@ class NotesController extends Controller
             $datos = array_add($datos, 'image', $nombre);
             \Storage::disk('local')->put($nombre, \File::get($image)); //IMPORTANTE 2 Y CONFIG/FYLESISTEM AÑADIR LOCAL
             //https://styde.net/sistema-de-archivos-y-almacenamiento-en-laravel-5/
-            $url=storage_path().'/'.$nombre;
+            $url=public_path().'/images/'.$nombre;
             $this->redimensionar($url);
         }
 
@@ -179,7 +179,7 @@ class NotesController extends Controller
                 \Storage::delete($note->image);
                 \Storage::disk('local')->put($nombre, \File::get($image));
                 Note::where('id',$id)->update(['image'=> $nombre ]);
-                $url=storage_path().'/'.$nombre;
+                $url=public_path().'/images/'.$nombre;
                 $this->redimensionar($url);
             }
         }
@@ -191,9 +191,8 @@ class NotesController extends Controller
 
     public function devolvImg($archivo)
     {
-        $public_path = storage_path();
-        $url = $public_path.'/'.$archivo;
-
+        $public_path = public_path();
+        $url = $public_path.'/images/'.$archivo;
         //verificamos si el archivo existe y lo retornamos
         if (\Storage::exists($archivo))
         {

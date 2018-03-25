@@ -53,8 +53,8 @@
                 <!-- Authentication Links -->
                 @if (Auth::guest())
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/login') }}">Login</a></li>
-                    <li><a href="{{ url('/register') }}">Register</a></li>
+                    <li><a href="{{ url('/login') }}">Entrar</a></li>
+                    <li><a href="{{ url('/register') }}">Registrarse</a></li>
                 </ul>
                 @else
                 <ul class="nav navbar-nav">
@@ -69,7 +69,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Cerrar sesión</a></li>
                         </ul>
                     </li>
                 </ul>
