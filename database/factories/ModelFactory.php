@@ -26,3 +26,4 @@ $factory->define(App\Note::class, function (Faker\Generator $faker) {
         'user_id'=> str_random(1)+1,
     ];
 });
+
