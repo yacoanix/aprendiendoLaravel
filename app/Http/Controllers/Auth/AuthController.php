@@ -63,10 +63,24 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        $token=str_random(40);
+        $client = new \GuzzleHttp\Client();
+        $response = $client->post( env('DP_BASE_URL')."/api", [
+            // un array con la data de los headers como tipo de peticion, etc.
+            'headers' => [
+                'api-key' => '$2y$10$8Gvd3pxUWWUY88OFDrX7peYDlMAp5EftAh3Pt3T01MSdbC1HBSQX6'],
+            // array de datos del formulario
+            'form_params' => [
+                'api_token'=>$token,
+            ]
+        ]
+        );
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'api_token'=> $token,
         ]);
     }
 }

@@ -11,6 +11,10 @@ use App\Http\Requests;
 
 class NotesController extends Controller
 {
+    //$cosa=env('DP_BASE_URL');
+    //xYorVgx76DBeFARV3Gfn5ZFXFoi7gplZ1H9rVjO1
+
+
     public function redimensionar($rutaImagenOriginal){
         //Ruta de la imagen original
 
@@ -119,8 +123,6 @@ class NotesController extends Controller
 
         $datos = array_add($datos, 'user_id', $id); //AÑADE A DATOS LA ID USUARIO
         Note::create($datos);
-
-
         return redirect()->to('notes');
     }
 
@@ -186,7 +188,9 @@ class NotesController extends Controller
         Note::where('id',$id)->update(['note'=> $notas]);
         Note::where('id',$id)->update(['category_id'=> $categ ]);
         $note=Note::findOrFail($id);
+
         return view('notes/details',compact('note'));
+
     }
 
     public function devolvImg($archivo)
