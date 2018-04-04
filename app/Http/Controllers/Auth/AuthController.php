@@ -68,7 +68,7 @@ class AuthController extends Controller
         $response = $client->post( env('DP_BASE_URL')."/api", [
             // un array con la data de los headers como tipo de peticion, etc.
             'headers' => [
-                'api-key' => '$2y$10$8Gvd3pxUWWUY88OFDrX7peYDlMAp5EftAh3Pt3T01MSdbC1HBSQX6'],
+                'api-key' => env('API_KEY')],
             // array de datos del formulario
             'form_params' => [
                 'api_token'=>$token,

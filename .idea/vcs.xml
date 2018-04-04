@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../api_lara" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../entrees/corp_web" vcs="Git" />
   </component>
 </project>
